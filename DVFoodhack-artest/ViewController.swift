@@ -77,7 +77,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         DispatchQueue.main.async {
             if let planeAnchor = anchor as? ARPlaneAnchor {
-                self.addPlane(node: node, anchor: planeAnchor)
+                
+                let plane = self.addPlane(node: node, anchor: planeAnchor)
+                
+                if let planeParent = plane.parent {
+                    let textPos = SCNVector3Make(
+                        0,
+                        0,
+                        0
+                    )
+                    self.sceneController.addText(string: "Hello", parent: planeParent, position: textPos)
+                }
                 self.feedbackGenerator.impactOccurred()
             }
         }
@@ -96,13 +106,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     
-    func addPlane(node: SCNNode, anchor: ARPlaneAnchor) {
+    func addPlane(node: SCNNode, anchor: ARPlaneAnchor) -> Plane {
         let plane = Plane(anchor)
         planes[anchor] = plane
         plane.setPlaneVisibility(self.visibleGrid)
         
         node.addChildNode(plane)
         print("Added plane: \(plane)")
+        return plane
     }
     
     func updatePlane(anchor: ARPlaneAnchor) {

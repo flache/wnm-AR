@@ -51,7 +51,6 @@ struct HoverScene {
         guard let scene = self.scene else { return }
         
         let textNode = self.createTextNode(string: string)
-        textNode.position = scene.rootNode.convertPosition(position, to: parent)
         
         parent.addChildNode(textNode)
     }
