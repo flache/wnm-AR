@@ -36,6 +36,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             sceneView.scene = scene
         }
         
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.didTapScreen))
+        tapRecognizer.numberOfTapsRequired = 1
+        tapRecognizer.numberOfTouchesRequired = 1
+        self.view.addGestureRecognizer(tapRecognizer)
+        
+        let doubleTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.didDoubleTapScreen))
+        doubleTapRecognizer.numberOfTapsRequired = 2
+        doubleTapRecognizer.numberOfTouchesRequired = 1
+        self.view.addGestureRecognizer(doubleTapRecognizer)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,14 +91,52 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 let plane = self.addPlane(node: node, anchor: planeAnchor)
                 
                 if let planeParent = plane.parent {
-                    let textPos = SCNVector3Make(
-                        0,
-                        0,
-                        0
-                    )
-                    self.sceneController.addText(string: "Hello", parent: planeParent, position: textPos)
+                   // self.sceneController.addBucket(parent: planeParent)
                 }
                 self.feedbackGenerator.impactOccurred()
+            }
+            
+            if let milkAnchor = anchor as? ARObjectAnchor {
+
+                
+                let textPos = SCNVector3Make(
+                milkAnchor.transform.columns.3.x,
+                milkAnchor.transform.columns.3.y + 0.2,
+                milkAnchor.transform.columns.3.z
+                )
+//                if let attachTextNode = node.parent {
+                    self.sceneController.addText(string: "Milk | 10 Days", parent: node, position: textPos)
+//                }
+                
+            }
+        }
+    }
+    
+    @objc func didDoubleTapScreen(recognizer: UITapGestureRecognizer) {
+        if didInitializeScene {
+            self.visibleGrid = !self.visibleGrid
+            planes.forEach({ (_, plane) in
+                plane.setPlaneVisibility(self.visibleGrid)
+            })
+        }
+    }
+    
+    @objc func didTapScreen(recognizer: UITapGestureRecognizer) {
+        print("1")
+        if didInitializeScene {
+            print("2")
+            if let camera = sceneView.session.currentFrame?.camera {
+                print("3")
+                let tapLocation = recognizer.location(in: sceneView)
+                let hitTestResults = sceneView.hitTest(tapLocation)
+                if let node = hitTestResults.first?.node, let scene = sceneController.scene {
+                    print("4")
+                    if let plane = node.parent as? Plane, let planeParent = plane.parent, let hitResult = hitTestResults.first {
+                        print("5")
+                        
+                        sceneController.addBucket(parent: planeParent)
+                    }
+                }
             }
         }
     }
@@ -125,6 +173,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func removePlane(anchor: ARPlaneAnchor) {
         if let plane = planes.removeValue(forKey: anchor) {
             plane.removeFromParentNode()
+        }
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        if let camera = sceneView.session.currentFrame?.camera {
+            didInitializeScene = true
+            
         }
     }
     

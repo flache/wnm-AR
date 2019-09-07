@@ -48,17 +48,23 @@ struct HoverScene {
     
     
     func addText(string: String, parent: SCNNode, position: SCNVector3 = SCNVector3Zero) {
-        guard let scene = self.scene else { return }
-        
+    
+        guard let scene = self.scene else {
+            return
+        }
         let textNode = self.createTextNode(string: string)
+        textNode.position = position
+        scene.rootNode.addChildNode(textNode)
+    }
+    
+    func addBucket( parent: SCNNode) {
         
         guard let bucketScene = SCNScene(named: "art.scnassets/bucket.scn") else {
             return
         }
-         let node = bucketScene.rootNode
+        let node = bucketScene.rootNode
         parent.addChildNode(node)
         
-        //parent.addChildNode(node)
     }
     
     func createTextNode(string: String) -> SCNNode {
@@ -66,11 +72,12 @@ struct HoverScene {
         text.font = UIFont.systemFont(ofSize: 1.0)
         text.flatness = 0.01
         text.firstMaterial?.diffuse.contents = UIColor.white
+        text.isWrapped = true
         
         let textNode = SCNNode(geometry: text)
         textNode.castsShadow = true
         
-        let fontSize = Float(0.04)
+        let fontSize = Float(0.03)
         textNode.scale = SCNVector3(fontSize, fontSize, fontSize)
         
         var minVec = SCNVector3Zero
