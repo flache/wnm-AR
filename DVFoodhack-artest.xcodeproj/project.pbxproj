@@ -13,6 +13,9 @@
 		646481EE23241A29007581D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 646481EC23241A29007581D9 /* Main.storyboard */; };
 		646481F023241A2A007581D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 646481EF23241A2A007581D9 /* Assets.xcassets */; };
 		646481F323241A2A007581D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 646481F123241A2A007581D9 /* LaunchScreen.storyboard */; };
+		646481FC23242A6B007581D9 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646481FB23242A6B007581D9 /* Plane.swift */; };
+		646481FF23242BA0007581D9 /* HoverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646481FE23242BA0007581D9 /* HoverScene.swift */; };
+		6464820523242FCC007581D9 /* plane_grid.png in Resources */ = {isa = PBXBuildFile; fileRef = 6464820423242FCB007581D9 /* plane_grid.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		646481EF23241A2A007581D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		646481F223241A2A007581D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		646481F423241A2A007581D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		646481FB23242A6B007581D9 /* Plane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
+		646481FE23242BA0007581D9 /* HoverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoverScene.swift; sourceTree = "<group>"; };
+		6464820423242FCB007581D9 /* plane_grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = plane_grid.png; path = Plane/plane_grid.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +62,9 @@
 		646481E523241A29007581D9 /* DVFoodhack-artest */ = {
 			isa = PBXGroup;
 			children = (
+				6464820223242EB0007581D9 /* Models */,
+				646481FD23242B8C007581D9 /* Scenes */,
+				646481FA23242A47007581D9 /* Objects */,
 				646481E623241A29007581D9 /* AppDelegate.swift */,
 				646481E823241A29007581D9 /* art.scnassets */,
 				646481EA23241A29007581D9 /* ViewController.swift */,
@@ -65,6 +74,30 @@
 				646481F423241A2A007581D9 /* Info.plist */,
 			);
 			path = "DVFoodhack-artest";
+			sourceTree = "<group>";
+		};
+		646481FA23242A47007581D9 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				646481FB23242A6B007581D9 /* Plane.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
+		646481FD23242B8C007581D9 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				646481FE23242BA0007581D9 /* HoverScene.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		6464820223242EB0007581D9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6464820423242FCB007581D9 /* plane_grid.png */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,6 +160,7 @@
 			files = (
 				646481E923241A29007581D9 /* art.scnassets in Resources */,
 				646481F323241A2A007581D9 /* LaunchScreen.storyboard in Resources */,
+				6464820523242FCC007581D9 /* plane_grid.png in Resources */,
 				646481F023241A2A007581D9 /* Assets.xcassets in Resources */,
 				646481EE23241A29007581D9 /* Main.storyboard in Resources */,
 			);
@@ -140,6 +174,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				646481EB23241A29007581D9 /* ViewController.swift in Sources */,
+				646481FF23242BA0007581D9 /* HoverScene.swift in Sources */,
+				646481FC23242A6B007581D9 /* Plane.swift in Sources */,
 				646481E723241A29007581D9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
