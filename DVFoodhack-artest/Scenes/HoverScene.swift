@@ -52,7 +52,13 @@ struct HoverScene {
         
         let textNode = self.createTextNode(string: string)
         
-        parent.addChildNode(textNode)
+        guard let bucketScene = SCNScene(named: "art.scnassets/bucket.scn") else {
+            return
+        }
+         let node = bucketScene.rootNode
+        parent.addChildNode(node)
+        
+        //parent.addChildNode(node)
     }
     
     func createTextNode(string: String) -> SCNNode {
